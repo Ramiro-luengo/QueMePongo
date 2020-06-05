@@ -4,7 +4,7 @@ public class MockAccuWeather implements AdapterDeClima {
 
 	@Override
 	public int getTemperaturaActual(String ciudad) {
-		return 57;
+		return 25;
 	}
 
 	@Override

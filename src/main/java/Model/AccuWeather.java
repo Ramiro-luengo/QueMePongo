@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class AccuWeather implements AdapterDeClima{
 	
+	@Override
 	public float getProbabilidadDePrecipitacion(String Ciudad){
 		AccuWeatherAPI apiClima = new AccuWeatherAPI();
 		
@@ -16,6 +17,7 @@ public class AccuWeather implements AdapterDeClima{
 		return probabilidadDePrecipitacion;
 	}
 	
+	@Override
 	public int getTemperaturaActual(String Ciudad) {
 		AccuWeatherAPI apiClima = new AccuWeatherAPI();
 		
