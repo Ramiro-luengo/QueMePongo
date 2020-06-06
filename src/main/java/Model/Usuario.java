@@ -7,44 +7,28 @@ import java.util.stream.Collectors;
 
 public class Usuario {
 	String ciudad;
-	Guardarropas guardarropas;
-	List<Proposicion> proposiciones = new ArrayList<Proposicion>();
-	List<Proposicion> proposicionesAceptadas = new ArrayList<Proposicion>();
+	List<Guardarropas> guardarropas;
 	
-	public Usuario(String ciudad, Guardarropas guardarropas) {
+	public Usuario(String ciudad, List<Guardarropas> guardarropas) {
 		this.ciudad = ciudad;
 		this.guardarropas = guardarropas;
 	}
+	public void agregarGuardarropas(Guardarropas guardarropas) {
+		this.guardarropas.add(guardarropas);
+	}
 	
-	public Guardarropas getGuardarropa() {
+	public List<Guardarropas> getGuardarropas() {
 		return guardarropas;
 	}
 
 	public Atuendo sugerirAtuendo(AdapterDeClima adapter){
 		GeneradorDeSugerenciasSegunTemperatura generadorDeSugerencias = new GeneradorDeSugerenciasSegunTemperatura(adapter);
 		
-		return generadorDeSugerencias.generarSugerencia(this.ciudad,this.guardarropas.getPrendas());
+		return generadorDeSugerencias.generarSugerencia(this.ciudad,this.guardarropas.get(0).getPrendas());
 	}
 	
-	public void enviarProposicion(Usuario usuario, Proposicion proposicion) {
-		usuario.recibirProposicion(proposicion);
+	public void enviarProposicion(Guardarropas guardarropas, Proposicion proposicion){
+		guardarropas.proponer(proposicion);
 	}
 
-	public void recibirProposicion(Proposicion proposicion) {
-		proposiciones.add(proposicion);
-	}
-	
-	public void aceptarProposicion(Proposicion proposicion){
-		proposicionesAceptadas.add(proposicion);
-		proposicion.aceptar(guardarropas);
-	}
-	
-	public void rechazarProposicion(Proposicion proposicion){
-		proposicion.rechazar();
-	}
-	
-	public void deshacerProposicionAceptada(Proposicion proposicion){
-		proposicion.hacerInversa(guardarropas);
-	}
-		
 }

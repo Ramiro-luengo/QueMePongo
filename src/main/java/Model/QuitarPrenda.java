@@ -9,10 +9,6 @@ public class QuitarPrenda implements Proposicion{
 	}
 
 	@Override
-	public void rechazar() {
-	}
-
-	@Override
 	public void hacerInversa(Guardarropas guardarropas) {
 		guardarropas.agregarPrenda(prenda);		
 	}

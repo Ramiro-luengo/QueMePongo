@@ -20,6 +20,7 @@ public class TestDeAtuendo {
 	private Usuario user;
 	private RopaDeViaje ropaDeViaje;
 	List<Prenda> listaDePrendas = new ArrayList<>();
+	private List<Guardarropas> listaDeGuardarropas = new ArrayList<>();
 	
 	
 	@Before
@@ -32,7 +33,11 @@ public class TestDeAtuendo {
 		listaDePrendas.add(new Prenda(TipoPrenda.REMERA,Material.NEOPRENE,new Color(255,20,30),null,Trama.LISA,30));
 		listaDePrendas.add(new Prenda(TipoPrenda.PANTALON,Material.LAICRA,new Color(255,25,20),new Color(20,100,40),Trama.RAYADA,28));
 		ropaDeViaje = new RopaDeViaje(listaDePrendas);
-		user = new Usuario("Buenos Aires, Argentina", ropaDeViaje);
+		listaDeGuardarropas.add(ropaDeViaje);
+		
+		user = new Usuario("Buenos Aires, Argentina", listaDeGuardarropas);
+		
+		
 		
 		builderAtuendo.agregarPrenda(new Prenda(TipoPrenda.ZAPATO,null,null,null,null,0));//por defecto tiene un zapato
 	}
@@ -55,7 +60,7 @@ public class TestDeAtuendo {
 	
 	@Test
 	public void usuarioPideSugerenciaDePrendas() {
-		List<Prenda> cloned_list = new ArrayList<Prenda>(user.getGuardarropa().getPrendas());
+		List<Prenda> cloned_list = new ArrayList<Prenda>(user.getGuardarropas().get(0).getPrendas());
 		cloned_list.remove(2);//remuevo la prenda que no deberia ser sugerida
 		
 		Assert.assertEquals(cloned_list, user.sugerirAtuendo(new MockAccuWeather()).getPrendas());
